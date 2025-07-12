@@ -1,0 +1,22 @@
+{
+  "component": {
+    "name": "NavBar",
+    "description": "Fixed top navigation bar with logo and dynamic nav items",
+    "props": [
+      {
+        "name": "navitems",
+        "type": "array",
+        "required": true,
+        "description": "List of navigation links with id, url, and pathName"
+      }
+    ],
+    "styles": {
+      "background": "primary-foreground",
+      "shadow": "slate-400",
+      "rounded": "full"
+    }
+  }
+}
+
+
+
