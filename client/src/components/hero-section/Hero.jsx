@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Code2 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -35,13 +36,15 @@ const Hero = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 text-white px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 h-12 group hover:scale-[0.97]"
-            >
-              Start Converting
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-2 duration-300 transition-all" />
-            </Button>
+            <Link to={"/code-shift"}>
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 text-white px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 h-12 group hover:scale-[0.97]"
+              >
+                Start Converting
+                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-2 duration-300 transition-all" />
+              </Button>
+            </Link>
           </div>
 
           {/* Trust indicators */}

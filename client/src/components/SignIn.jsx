@@ -7,7 +7,7 @@ import { ChevronRightIcon, Loader2Icon } from "lucide-react";
 import * as z from "zod";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import axios from "axios";
-const BASE_URL = import.meta.env.VITE_PUBLIC_BASE_URL;
+import { BASE_URL } from "../../utils/url";
 import { setLoading, setToken, setUser } from "../../slice/authSlice";
 import { useSelector, useDispatch } from "react-redux";
 

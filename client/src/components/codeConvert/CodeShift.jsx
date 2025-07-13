@@ -24,7 +24,7 @@ import { useSelector } from "react-redux";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
 import Editor from "@monaco-editor/react";
-const BASE_URL = import.meta.env.VITE_PUBLIC_BASE_URL;
+import { BASE_URL } from "../../../utils/url";
 
 const CodeShift = () => {
   const [sourceCode, setSourceCode] = useState("");

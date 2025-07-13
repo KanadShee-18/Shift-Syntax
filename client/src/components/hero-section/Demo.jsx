@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Copy, Download } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Demo = () => {
   const jsonInput = `{
@@ -83,13 +84,15 @@ active: true`;
         </div>
 
         <div className="text-center mt-12">
-          <Button
-            size="lg"
-            className="bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 text-white px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-          >
-            Try It Now
-            <ArrowRight className="ml-2 w-5 h-5" />
-          </Button>
+          <Link to={"/code-shift"}>
+            <Button
+              size="lg"
+              className="bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 text-white px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              Try It Now
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

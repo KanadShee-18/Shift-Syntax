@@ -9,7 +9,7 @@ import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-const BASE_URL = import.meta.env.VITE_PUBLIC_BASE_URL;
+import { BASE_URL } from "../../utils/url";
 
 const FormError = ({ msg }) => {
   return <p className="text-sm font-medium text-red-400 ml-2">{msg}</p>;
