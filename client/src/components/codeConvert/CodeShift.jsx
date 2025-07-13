@@ -25,6 +25,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
 import Editor from "@monaco-editor/react";
 import { BASE_URL } from "../../../utils/url";
+import { languages } from "../../../utils/contants";
 
 const CodeShift = () => {
   const [sourceCode, setSourceCode] = useState("");
@@ -40,30 +41,6 @@ const CodeShift = () => {
   const { token } = useSelector((state) => state.auth);
 
   const readerRef = useRef(null);
-
-  const languages = [
-    { value: "javascript", label: "JavaScript", extension: ".js" },
-    { value: "python", label: "Python", extension: ".py" },
-    { value: "java", label: "Java", extension: ".java" },
-    { value: "c", label: "C", extension: ".c" },
-    { value: "cpp", label: "C++", extension: ".cpp" },
-    { value: "csharp", label: "C#", extension: ".cs" },
-    { value: "go", label: "Go", extension: ".go" },
-    { value: "yaml", label: "YAML", extension: ".yaml" },
-    { value: "json", label: "JSON", extension: ".json" },
-    { value: "rust", label: "Rust", extension: ".rs" },
-    { value: "php", label: "PHP", extension: ".php" },
-    { value: "ruby", label: "Ruby", extension: ".rb" },
-    { value: "swift", label: "Swift", extension: ".swift" },
-    { value: "kotlin", label: "Kotlin", extension: ".kt" },
-    { value: "typescript", label: "TypeScript", extension: ".ts" },
-    { value: "html", label: "HTML", extension: ".html" },
-    { value: "css", label: "CSS", extension: ".css" },
-    { value: "sql", label: "SQL", extension: ".sql" },
-    { value: "r", label: "R", extension: ".r" },
-    { value: "scala", label: "Scala", extension: ".scala" },
-    { value: "perl", label: "Perl", extension: ".pl" },
-  ];
 
   const customStyle = {
     ...oneLight,
@@ -437,9 +414,9 @@ const CodeShift = () => {
               <div className="relative">
                 <SyntaxHighlighter
                   language={targetLang.toLowerCase()}
-                  lineProps={{
-                    style: { whiteSpace: "pre-wrap" },
-                  }}
+                  // lineProps={{
+                  //   style: { whiteSpace: "pre-wrap" },
+                  // }}
                   style={customStyle}
                   wrapLongLines={true}
                   wrapLines={true}

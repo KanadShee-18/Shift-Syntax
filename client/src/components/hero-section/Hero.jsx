@@ -59,7 +59,7 @@ const Hero = () => {
             </div>
           </div>
 
-          <div className="flex items-center justify-center mt-5">
+          <div className="md:flex hidden items-center justify-center mt-5">
             <img src="/code.png" alt="code" className="w-full md:w-3/4" />
           </div>
         </div>
