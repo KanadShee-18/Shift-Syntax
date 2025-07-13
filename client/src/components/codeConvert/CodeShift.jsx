@@ -24,6 +24,7 @@ import { useSelector } from "react-redux";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
 import Editor from "@monaco-editor/react";
+const BASE_URL = import.meta.env.VITE_PUBLIC_BASE_URL;
 
 const CodeShift = () => {
   const [sourceCode, setSourceCode] = useState("");
@@ -88,7 +89,7 @@ const CodeShift = () => {
     setStreamingText("");
 
     try {
-      const response = await fetch("http://localhost:4000/api/v1/chat/query", {
+      const response = await fetch(`${BASE_URL}/api/v1/chat/query`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
