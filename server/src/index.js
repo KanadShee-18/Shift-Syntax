@@ -14,7 +14,10 @@ dbConnect();
 
 const PORT = process.env.PORT || 4000;
 
-const allowedOrigins = ["http://localhost:5173"];
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://shift-syntax.vercel.app",
+];
 
 app.use(
   cors({
