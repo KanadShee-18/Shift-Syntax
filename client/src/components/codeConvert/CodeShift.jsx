@@ -31,6 +31,7 @@ const CodeShift = () => {
   const [convertedCode, setConvertedCode] = useState("");
   const [sourceLang, setSourceLang] = useState("javascript");
   const [targetLang, setTargetLang] = useState("python");
+  const [targetExtension, setTargetExtension] = useState("");
   const [isConverting, setIsConverting] = useState(false);
   const [error, setError] = useState("");
   const [streamingText, setStreamingText] = useState("");
@@ -41,27 +42,27 @@ const CodeShift = () => {
   const readerRef = useRef(null);
 
   const languages = [
-    { value: "javascript", label: "JavaScript" },
-    { value: "python", label: "Python" },
-    { value: "java", label: "Java" },
-    { value: "c", label: "C" },
-    { value: "cpp", label: "C++" },
-    { value: "csharp", label: "C#" },
-    { value: "go", label: "Go" },
-    { value: "yaml", label: "YAML" },
-    { value: "json", label: "JSON" },
-    { value: "rust", label: "Rust" },
-    { value: "php", label: "PHP" },
-    { value: "ruby", label: "Ruby" },
-    { value: "swift", label: "Swift" },
-    { value: "kotlin", label: "Kotlin" },
-    { value: "typescript", label: "TypeScript" },
-    { value: "html", label: "HTML" },
-    { value: "css", label: "CSS" },
-    { value: "sql", label: "SQL" },
-    { value: "r", label: "R" },
-    { value: "scala", label: "Scala" },
-    { value: "perl", label: "Perl" },
+    { value: "javascript", label: "JavaScript", extension: ".js" },
+    { value: "python", label: "Python", extension: ".py" },
+    { value: "java", label: "Java", extension: ".java" },
+    { value: "c", label: "C", extension: ".c" },
+    { value: "cpp", label: "C++", extension: ".cpp" },
+    { value: "csharp", label: "C#", extension: ".cs" },
+    { value: "go", label: "Go", extension: ".go" },
+    { value: "yaml", label: "YAML", extension: ".yaml" },
+    { value: "json", label: "JSON", extension: ".json" },
+    { value: "rust", label: "Rust", extension: ".rs" },
+    { value: "php", label: "PHP", extension: ".php" },
+    { value: "ruby", label: "Ruby", extension: ".rb" },
+    { value: "swift", label: "Swift", extension: ".swift" },
+    { value: "kotlin", label: "Kotlin", extension: ".kt" },
+    { value: "typescript", label: "TypeScript", extension: ".ts" },
+    { value: "html", label: "HTML", extension: ".html" },
+    { value: "css", label: "CSS", extension: ".css" },
+    { value: "sql", label: "SQL", extension: ".sql" },
+    { value: "r", label: "R", extension: ".r" },
+    { value: "scala", label: "Scala", extension: ".scala" },
+    { value: "perl", label: "Perl", extension: ".pl" },
   ];
 
   const customStyle = {
@@ -326,7 +327,7 @@ const CodeShift = () => {
                   Source Code
                 </h2>
                 <div className="flex items-center space-x-2">
-                  <Select onValueChange={setSourceLang}>
+                  <Select value={sourceLang} onValueChange={setSourceLang}>
                     <SelectTrigger className="w-[180px] bg-white">
                       <SelectValue placeholder="Source Language" />
                     </SelectTrigger>
@@ -382,7 +383,16 @@ const CodeShift = () => {
                   Converted Code
                 </h2>
                 <div className="flex items-center space-x-2">
-                  <Select onValueChange={setTargetLang}>
+                  <Select
+                    value={targetLang}
+                    onValueChange={(value) => {
+                      setTargetLang(value);
+                      const selected = languages.find(
+                        (lang) => lang.value === value
+                      );
+                      setTargetExtension(selected?.extension || "txt");
+                    }}
+                  >
                     <SelectTrigger className="w-[180px] bg-white">
                       <SelectValue placeholder="Target Language" />
                     </SelectTrigger>
@@ -409,7 +419,10 @@ const CodeShift = () => {
                       </button>
                       <button
                         onClick={() =>
-                          downloadCode(displayCode, `converted.${targetLang}`)
+                          downloadCode(
+                            displayCode,
+                            `converted.${targetExtension}`
+                          )
                         }
                         className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-md transition-colors"
                         title="Download code"
