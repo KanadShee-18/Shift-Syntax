@@ -16,7 +16,7 @@ const SupportedFormats = () => {
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+          <h2 className="text-4xl lg:text-5xl font-bold text-transparent bg-gradient-to-tl from-slate-400 to-indigo-950 bg-clip-text mb-4">
             Supported Formats
           </h2>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto">

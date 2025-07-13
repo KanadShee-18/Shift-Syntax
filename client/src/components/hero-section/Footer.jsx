@@ -19,7 +19,8 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <a
-                href="#"
+                href="https://github.com/KanadShee-18/Shift-Syntax"
+                target="_blank"
                 className="text-slate-400 hover:text-teal-400 transition-colors"
               >
                 <Github className="w-5 h-5" />
@@ -164,8 +165,8 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-slate-700 mt-12 pt-8 text-center">
-          <p className="text-slate-400">
-            © 2024 FormatFlow. All rights reserved. Built with ❤️ for
+          <p className="text-indigo-400 font-medium tracking-wide">
+            © 2025 SyntaxShift. All rights reserved. Built with ❤️ for
             developers.
           </p>
         </div>

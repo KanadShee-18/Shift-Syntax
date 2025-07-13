@@ -1,20 +1,12 @@
+import axios from "axios";
+import { Blinds, BracesIcon, GitCompare, LogInIcon, User } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Button } from "./ui/button";
-import axios from "axios";
-const BASE_URL = import.meta.env.VITE_PUBLIC_BASE_URL;
 import { toast } from "sonner";
 import { setToken, setUser } from "../../slice/authSlice";
-import {
-  Blinds,
-  GitCompare,
-  LogInIcon,
-  User,
-  LogOutIcon,
-  BracesIcon,
-} from "lucide-react";
-import { Separator } from "./ui/separator";
+import { BASE_URL } from "../../utils/url";
 import Avatar from "./Avatar";
+import { Separator } from "./ui/separator";
 
 const navitems = [
   {
@@ -94,7 +86,7 @@ const Navbar = () => {
             <img
               src="/logo-text.png"
               alt="Logo"
-              className="w-52 md:block hidden"
+              className="w-48 md:block hidden"
             />
           </Link>
         </div>
@@ -107,8 +99,8 @@ const Navbar = () => {
                   key={navlink.id}
                   className={`relative flex items-center group hover:text-teal-600`}
                 >
-                  <navlink.icon className="size-4 group-hover:translate-x-1 duration-300 transition-all" />
-                  <li className="text-sm px-2.5 py-1.5 rounded-md   group-hover:-translate-x-1 duration-300 transition-all cursor-pointer">
+                  <navlink.icon className="size-4 mx-2 md:mx-0 group-hover:translate-x-1 duration-300 transition-all" />
+                  <li className="text-sm md:block hidden px-2.5 py-1.5 rounded-md   group-hover:-translate-x-1 duration-300 transition-all cursor-pointer">
                     {navlink.pathName}
                   </li>
                   {index < navitems.length - 1 && (

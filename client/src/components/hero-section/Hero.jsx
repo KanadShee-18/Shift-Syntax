@@ -17,7 +17,7 @@ const Hero = () => {
         <div className="absolute w-[150px] md:w-[250px] h-[150px] md:h-[250px] rounded-4xl blur-[100px] aspect-square bg-gradient-to-br from-indigo-500 via-teal-600 to-slate-600 opacity-60 bottom-0 right-0" />
         <div className="text-center mt-10">
           {/* Main heading */}
-          <h1 className="text-5xl lg:text-7xl font-bold tracking-tight mb-6">
+          <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold tracking-tight mb-6">
             <span className="bg-gradient-to-r from-slate-900 via-indigo-900 to-teal-800 bg-clip-text text-transparent">
               Convert Code Formats With
             </span>

@@ -37,17 +37,17 @@ const About = () => {
       </div>
       <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
         <div className="absolute inset-0 bg-gradient-to-br from-teal-500/10 to-indigo-600/10"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 pt-14">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 pt-20">
           <div className="text-center">
             <div className="flex flex-col items-center justify-center mb-8">
               <div className="p-4 bg-gradient-to-br from-teal-500 to-indigo-600 rounded-2xl mr-4">
-                <Code2 className="w-12 h-12 text-white" />
+                <Code2 className="size-6 md:size-12 text-white" />
               </div>
-              <h1 className="text-5xl font-bold bg-gradient-to-r from-teal-400 to-indigo-400 bg-clip-text text-transparent">
+              <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold bg-gradient-to-r from-teal-400 to-indigo-400 bg-clip-text text-transparent">
                 About FormatFlow
               </h1>
             </div>
-            <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-sm sm:text-base md:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
               We're on a mission to simplify code conversion and make
               developers' lives easier. FormatFlow was born from the everyday
               frustration of switching between different data formats.
@@ -60,18 +60,18 @@ const About = () => {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-slate-900 mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
               Our Mission
             </h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+            <p className="text-sm md:text-xl text-slate-600 max-w-3xl mx-auto">
               To provide the fastest, most secure, and most reliable code
               conversion tools that developers trust for their daily workflow.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-teal-50 to-teal-100 border border-teal-200">
-              <div className="p-3 bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl w-fit mx-auto mb-6">
+            <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-teal-50 to-teal-100 border border-teal-200 group hover:shadow-lg shadow-slate-300 transition-all duration-200">
+              <div className="p-3 bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl w-fit mx-auto mb-6 group-hover:scale-110 transition-all duration-200">
                 <Zap className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-2xl font-semibold text-slate-900 mb-4">
@@ -83,8 +83,8 @@ const About = () => {
               </p>
             </div>
 
-            <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-indigo-50 to-indigo-100 border border-indigo-200">
-              <div className="p-3 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl w-fit mx-auto mb-6">
+            <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-indigo-50 to-indigo-100 border border-indigo-200 group hover:shadow-lg shadow-slate-300 transition-all duration-200">
+              <div className="p-3 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl w-fit mx-auto mb-6 group-hover:scale-110 transition-all duration-200">
                 <Shield className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-2xl font-semibold text-slate-900 mb-4">
@@ -96,8 +96,8 @@ const About = () => {
               </p>
             </div>
 
-            <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-rose-50 to-rose-100 border border-rose-200">
-              <div className="p-3 bg-gradient-to-br from-rose-500 to-rose-600 rounded-xl w-fit mx-auto mb-6">
+            <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-rose-50 to-rose-100 border border-rose-200 group hover:shadow-lg shadow-slate-300 transition-all duration-200">
+              <div className="p-3 bg-gradient-to-br from-rose-500 to-rose-600 rounded-xl w-fit mx-auto mb-6 group-hover:scale-110 transition-all duration-200">
                 <Heart className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-2xl font-semibold text-slate-900 mb-4">
@@ -117,7 +117,7 @@ const About = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-4xl font-bold text-slate-900 mb-6">
+              <h2 className="text-4xl font-bold text-transparent bg-gradient-to-bl from-slate-400 to-indigo-950 bg-clip-text mb-6">
                 Our Story
               </h2>
               <div className="space-y-6 text-lg text-slate-600">
@@ -195,7 +195,7 @@ const About = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center p-6">
+            <div className="text-center p-6 hover:shadow-lg shadow-slate-300 transition-all duration-200 rounded-2xl">
               <div className="p-3 bg-gradient-to-br from-teal-100 to-teal-200 rounded-xl w-fit mx-auto mb-4">
                 <Users className="w-6 h-6 text-teal-600" />
               </div>
@@ -208,7 +208,7 @@ const About = () => {
               </p>
             </div>
 
-            <div className="text-center p-6">
+            <div className="text-center p-6 hover:shadow-lg shadow-slate-300 transition-all duration-200 rounded-2xl">
               <div className="p-3 bg-gradient-to-br from-indigo-100 to-indigo-200 rounded-xl w-fit mx-auto mb-4">
                 <Shield className="w-6 h-6 text-indigo-600" />
               </div>
@@ -221,7 +221,7 @@ const About = () => {
               </p>
             </div>
 
-            <div className="text-center p-6">
+            <div className="text-center p-6 hover:shadow-lg shadow-slate-300 transition-all duration-200 rounded-2xl">
               <div className="p-3 bg-gradient-to-br from-rose-100 to-rose-200 rounded-xl w-fit mx-auto mb-4">
                 <Zap className="w-6 h-6 text-rose-600" />
               </div>
@@ -234,7 +234,7 @@ const About = () => {
               </p>
             </div>
 
-            <div className="text-center p-6">
+            <div className="text-center p-6 hover:shadow-lg shadow-slate-300 transition-all duration-200 rounded-2xl">
               <div className="p-3 bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl w-fit mx-auto mb-4">
                 <Heart className="w-6 h-6 text-slate-600" />
               </div>
