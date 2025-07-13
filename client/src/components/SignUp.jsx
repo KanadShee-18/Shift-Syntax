@@ -50,13 +50,13 @@ const SignUp = () => {
         return;
       }
       setErrorMsg({});
-      console.log("Validated data: ", validatedData);
+      // console.log("Validated data: ", validatedData);
       const resp = await axios.post(
         `${BASE_URL}/api/v1/user/sign-up`,
         validatedData.data,
         { withCredentials: true }
       );
-      console.log("Axios response: ", resp);
+      // console.log("Axios response: ", resp);
 
       const success = resp.data.success;
 
@@ -73,9 +73,9 @@ const SignUp = () => {
         return;
       }
 
-      console.log("make the backend call");
+      // console.log("make the backend call");
     } catch (error) {
-      console.log("Error in form submission: ", error);
+      // console.log("Error in form submission: ", error);
       if (error.response && error.response.data) {
         const errorMsg = error.response.data.message;
         toast.error(errorMsg, {

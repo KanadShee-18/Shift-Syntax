@@ -45,7 +45,7 @@ const navitems = [
 
 const Navbar = () => {
   const location = useLocation();
-  console.log(location.pathname);
+  // console.log(location.pathname);
   const pathname = location.pathname;
   const dispatch = useDispatch();
   const { token, user } = useSelector((state) => state.auth);
@@ -70,8 +70,8 @@ const Navbar = () => {
       }
       toast.success("Logout successful!");
       navigate("/", { replace: true });
-    } catch (error) {
-      console.log("Logout error: ", error);
+    } catch {
+      // console.log("Logout error: ", error);
       toast.error("Logout failed. Please try again.");
     }
   };

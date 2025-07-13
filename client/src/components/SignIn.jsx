@@ -50,13 +50,13 @@ const SignIn = () => {
         return;
       }
       setErrorMsg({});
-      console.log("Validated data: ", validatedData);
+      // console.log("Validated data: ", validatedData);
       const resp = await axios.post(
         `${BASE_URL}/api/v1/user/sign-in`,
         validatedData.data,
         { withCredentials: true }
       );
-      console.log("Axios response: ", resp);
+      // console.log("Axios response: ", resp);
       const { token } = await resp.data.loggedUser;
       localStorage.setItem("authToken", JSON.stringify(token));
 
@@ -64,9 +64,9 @@ const SignIn = () => {
       localStorage.setItem("user", JSON.stringify({ email, username }));
       dispatch(setToken(token));
       dispatch(setUser({ email, username }));
-    } catch (error) {
+    } catch {
       dispatch(setLoading(false));
-      console.log("Error in form submission: ", error);
+      // console.log("Error in form submission: ", error);
       throw new Error("Error in validating form data");
     } finally {
       dispatch(setLoading(false));
