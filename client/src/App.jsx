@@ -1,5 +1,4 @@
 import HomeSection from "./components/HeroSection";
-import Navbar from "./components/navbar";
 import { Routes, Route } from "react-router-dom";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
@@ -8,6 +7,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import OpenRoute from "./components/OpenRoute";
 import CodeShift from "./components/codeConvert/CodeShift";
 import About from "./components/About";
+import Navbar from "./components/Navbar";
 
 const App = () => {
   return (
