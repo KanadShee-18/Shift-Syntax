@@ -80,7 +80,13 @@ const Navbar = () => {
         pathname === "/about" ? "hidden" : "block"
       }  left-1/2 -translate-x-1/2 mx-auto`}
     >
-      <div className="flex justify-between backdrop-blur-md bg-primary-foreground/20 items-center h-full px-4 md:px-10 rounded-full shadow-sm shadow-slate-300 md:mx-10 mx-4">
+      <div
+        className={`flex justify-between backdrop-blur-md ${
+          pathname === "/code-shift"
+            ? "bg-white/5 shadow-slate-950"
+            : "bg-primary-foreground/20 shadow-slate-300"
+        } items-center h-full px-4 md:px-10 rounded-full shadow-md md:mx-10 mx-4`}
+      >
         <div>
           <Link to={"/"} className="flex items-center gap-2">
             <img src="/logo.png" alt="Logo" className="w-12" />
@@ -116,9 +122,11 @@ const Navbar = () => {
               <div className="flex items-center gap-2">
                 <Link
                   to={pathname === "/code-shift" ? "/" : "/code-shift"}
-                  className={
-                    "group flex items-center bg-background gap-2.5 h-full px-5 text-sm rounded-md hover:bg-gradient-to-br from-teal-200 via-indigo-300 to-slate-200 hover:scale-[0.97] duration-300 transition-all hover:text-slate-800 text-teal-500 font-semibold shadow-sm shadow-slate-300"
-                  }
+                  className={`group flex items-center ${
+                    pathname === "/code-shift"
+                      ? "bg-background/5 shadow-slate-950"
+                      : "bg-background shadow-slate-300"
+                  } gap-2.5 h-full px-5 text-sm rounded-md hover:bg-gradient-to-br from-teal-200 via-indigo-300 to-slate-200 hover:scale-[0.97] duration-300 transition-all hover:text-slate-800 text-teal-500 font-semibold shadow-sm`}
                 >
                   {pathname === "/code-shift" ? (
                     <Blinds className="group-hover:translate-x-1 duration-200 transition-all size-5" />
