@@ -7,6 +7,8 @@ import {
   ArrowRight,
   X,
   CheckCheckIcon,
+  ArrowRightLeftIcon,
+  OctagonXIcon,
 } from "lucide-react";
 import {
   Select,
@@ -17,9 +19,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Button } from "../ui/button";
 import { useSelector } from "react-redux";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
+import Editor from "@monaco-editor/react";
 
 const CodeShift = () => {
   const [sourceCode, setSourceCode] = useState("");
@@ -209,14 +213,20 @@ const CodeShift = () => {
   const displayCode = streamingText || convertedCode;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 md:py-24">
-      <div className="max-w-7xl mx-auto px-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-24">
+      <div className="fixed inset-0 z-0 bg-[#effffe8f] bg-[radial-gradient(#dae0df_1px,transparent_1px)] [background-size:16px_16px]"></div>
+      <div className="absolute inset-0 z-10 overflow-hidden">
+        <div className="absolute top-0 left-0 w-80 h-80 rounded-full bg-gradient-to-br from-teal-400 to-slate-700 opacity-80 blur-[190px]"></div>
+        <div className="fixed bottom-0 right-0 w-80 h-80 rounded-full bg-gradient-to-br from-teal-400 to-slate-700 blur-[190px] opacity-80"></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 relative z-[50]">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-transparent bg-gradient-to-r from-teal-400 via-slate-900 to-indigo-900 bg-clip-text mb-2">
-            AI Code Converter
+          <h1 className="md:text-4xl text-3xl font-bold text-transparent bg-gradient-to-r from-teal-400 via-slate-900 to-cyan-500 bg-clip-text mb-2">
+            Convert Your Code with Ease
           </h1>
-          <p className="text-gray-600 text-lg">
+          <p className="text-gray-600 md:text-lg text-sm">
             Convert code between different programming languages using AI
           </p>
         </div>
@@ -243,46 +253,87 @@ const CodeShift = () => {
           </div>
         )}
 
+        {/* Buttons to Control */}
+        <div className="my-8 flex flex-col items-center space-y-4">
+          <div className="flex flex-wrap justify-center gap-4">
+            <Button
+              onClick={handleConvert}
+              disabled={isConverting || !sourceCode.trim()}
+              className="flex items-center px-8 py-3 bg-gradient-to-r from-teal-600 via-indigo-950 to-teal-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all ease-out shadow-md hover:shadow-lg transform hover:scale-105"
+            >
+              {isConverting ? (
+                <>
+                  <RefreshCw size={20} className="animate-spin" />
+                  <span>Converting...</span>
+                </>
+              ) : (
+                <>
+                  <Code size={20} />
+                  <span>Convert Code</span>
+                  <ArrowRight size={20} />
+                </>
+              )}
+            </Button>
+
+            <Button
+              onClick={swapLanguages}
+              disabled={isConverting}
+              className="flex items-center space-x-2 px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors shadow-md hover:shadow-lg"
+              title="Swap languages"
+            >
+              <ArrowRightLeftIcon />
+              <span>Swap</span>
+            </Button>
+
+            {isConverting && (
+              <Button
+                onClick={handleStop}
+                className="flex items-center px-6 py-3 bg-rose-600 text-white rounded-lg hover:bg-rose-600 transition-colors shadow-md hover:shadow-lg"
+              >
+                <OctagonXIcon />
+                <span>Stop</span>
+              </Button>
+            )}
+          </div>
+
+          {/* Progress Indicator */}
+          {isConverting && (
+            <div className="text-center">
+              <div className="text-sm text-gray-600 mb-2">
+                {streamingText
+                  ? "Receiving response..."
+                  : "Connecting to AI..."}
+              </div>
+              <div className="w-64 bg-gray-200 rounded-full h-2">
+                <div
+                  className="bg-teal-500 h-2 rounded-full animate-pulse"
+                  style={{ width: streamingText ? "75%" : "25%" }}
+                ></div>
+              </div>
+            </div>
+          )}
+        </div>
+
         {/* Main Content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Source Code Panel */}
-          <div className="bg-white rounded-lg shadow-lg border border-gray-200">
-            <div className="p-6 border-b border-gray-200">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-semibold text-gray-900 flex items-center">
-                  <Code className="mr-2" size={20} />
+          <div className="bg-transparent backdrop-blur-sm rounded-lg shadow-lg border border-gray-200">
+            <div className="p-6">
+              <div className="flex flex-col md:flex-row items-start md:items-center md:justify-between mb-4 gap-y-2 md:gap-y-0">
+                <h2 className="text-xl font-semibold text-transparent bg-gradient-to-r from-teal-600 to-indigo-950 bg-clip-text flex items-center">
+                  <Code className="mr-2 text-teal-600" size={20} />
                   Source Code
                 </h2>
                 <div className="flex items-center space-x-2">
-                  {/* <select
-                    value={sourceLang}
-                    onChange={(e) => setSourceLang(e.target.value)}
-                    className="px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    disabled={isConverting}
-                  >
-                    {languages.map((lang) => (
-                      <option
-                        key={lang.value}
-                        value={lang.value}
-                        className="px-2 py-1 !border-b-2"
-                      >
-                        {lang.label}
-                      </option>
-                    ))}
-                  </select> */}
-
-                  <Select>
-                    <SelectTrigger className="w-[180px]">
+                  <Select onValueChange={setSourceLang}>
+                    <SelectTrigger className="w-[180px] bg-white">
                       <SelectValue placeholder="Source Language" />
                     </SelectTrigger>
                     <SelectContent className="max-h-96">
                       <SelectGroup>
                         <SelectLabel>Available Languages</SelectLabel>
                         {languages.map((lang) => (
-                          <SelectItem
-                            value={lang.value}
-                            setSourceLang={lang.value}
-                          >
+                          <SelectItem key={lang.label} value={lang.value}>
                             {lang.label}
                           </SelectItem>
                         ))}
@@ -292,7 +343,7 @@ const CodeShift = () => {
 
                   <button
                     onClick={clearCode}
-                    className="px-3 py-2 text-sm text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-md transition-colors"
+                    className="px-3 md:block hidden py-2 text-sm text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-md transition-colors"
                     disabled={isConverting}
                   >
                     Clear
@@ -300,37 +351,45 @@ const CodeShift = () => {
                 </div>
               </div>
 
-              <textarea
+              <Editor
+                // height="400px"
+                language={sourceLang.toLowerCase()}
                 value={sourceCode}
-                onChange={(e) => setSourceCode(e.target.value)}
-                placeholder="Enter your code here..."
-                className="w-full scrollbar-hide h-96 p-4 border border-gray-300 rounded-lg font-mono text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none bg-gray-50"
-                disabled={isConverting}
+                onChange={(value) => setSourceCode(value || "")}
+                theme="vs-light" // or "light"
+                options={{
+                  fontSize: 16,
+                  fontFamily:
+                    'JetBrains Mono, Monaco, Consolas, "Courier New", monospace',
+                  lineNumbers: "on",
+                  wordWrap: "on",
+                  minimap: { enabled: false },
+                  scrollBeyondLastLine: false,
+                  readOnly: isConverting,
+                }}
+                className="!scrollbar-hide !focus:outline-none !h-[200px] md:!h-[400px]"
               />
             </div>
           </div>
 
           {/* Converted Code Panel */}
-          <div className="bg-white rounded-lg shadow-lg border border-gray-200">
-            <div className="p-6 border-b border-gray-200">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-semibold text-gray-900 flex items-center">
-                  <ArrowRight className="mr-2" size={20} />
+          <div className="bg-transparent backdrop-blur-sm rounded-lg shadow-lg border border-gray-200">
+            <div className="p-6">
+              <div className="flex flex-col md:flex-row items-start md:items-center md:justify-between mb-4 gap-y-2 md:gap-y-0">
+                <h2 className="text-xl font-semibold text-transparent bg-gradient-to-l from-teal-600 to-indigo-950 bg-clip-text flex items-center">
+                  <ArrowRight className="mr-2 text-indigo-900" size={20} />
                   Converted Code
                 </h2>
                 <div className="flex items-center space-x-2">
-                  <Select>
-                    <SelectTrigger className="w-[180px]">
+                  <Select onValueChange={setTargetLang}>
+                    <SelectTrigger className="w-[180px] bg-white">
                       <SelectValue placeholder="Target Language" />
                     </SelectTrigger>
                     <SelectContent className="max-h-96">
                       <SelectGroup>
                         <SelectLabel>Available Languages</SelectLabel>
                         {languages.map((lang) => (
-                          <SelectItem
-                            value={lang.value}
-                            setTargetLang={lang.value}
-                          >
+                          <SelectItem key={lang.value} value={lang.value}>
                             {lang.label}
                           </SelectItem>
                         ))}
@@ -362,17 +421,6 @@ const CodeShift = () => {
               </div>
 
               <div className="relative">
-                {/* <textarea
-                  value={displayCode}
-                  readOnly
-                  placeholder={
-                    isConverting
-                      ? "Converting..."
-                      : "Converted code will appear here..."
-                  }
-                  className="w-full h-96 p-4 border border-gray-300 rounded-lg font-mono text-sm bg-gray-50 resize-none"
-                /> */}
-
                 <SyntaxHighlighter
                   language={targetLang.toLowerCase()}
                   lineProps={{
@@ -382,7 +430,7 @@ const CodeShift = () => {
                   wrapLongLines={true}
                   wrapLines={true}
                   showLineNumbers
-                  className="!border-none !font-mono !h-96 scrollbar-hide"
+                  className="!border-none !font-mono !h-[200px] md:!h-[400px] scrollbar-hide shadow-sm shadow-slate-400"
                 >
                   {displayCode ||
                     (isConverting
@@ -403,94 +451,9 @@ const CodeShift = () => {
           </div>
         </div>
 
-        {/* Control Panel */}
-        <div className="mt-8 flex flex-col items-center space-y-4">
-          <div className="flex flex-wrap justify-center gap-4">
-            <button
-              onClick={handleConvert}
-              disabled={isConverting || !sourceCode.trim()}
-              className="flex items-center space-x-2 px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors shadow-md hover:shadow-lg transform hover:scale-105"
-            >
-              {isConverting ? (
-                <>
-                  <RefreshCw size={20} className="animate-spin" />
-                  <span>Converting...</span>
-                </>
-              ) : (
-                <>
-                  <Code size={20} />
-                  <span>Convert Code</span>
-                  <ArrowRight size={20} />
-                </>
-              )}
-            </button>
-
-            <button
-              onClick={swapLanguages}
-              disabled={isConverting}
-              className="flex items-center space-x-2 px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors shadow-md hover:shadow-lg"
-              title="Swap languages"
-            >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"
-                />
-              </svg>
-              <span>Swap</span>
-            </button>
-
-            {isConverting && (
-              <button
-                onClick={handleStop}
-                className="flex items-center space-x-2 px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors shadow-md hover:shadow-lg"
-              >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-                <span>Stop</span>
-              </button>
-            )}
-          </div>
-
-          {/* Progress Indicator */}
-          {isConverting && (
-            <div className="text-center">
-              <div className="text-sm text-gray-600 mb-2">
-                {streamingText
-                  ? "Receiving response..."
-                  : "Connecting to AI..."}
-              </div>
-              <div className="w-64 bg-gray-200 rounded-full h-2">
-                <div
-                  className="bg-blue-600 h-2 rounded-full animate-pulse"
-                  style={{ width: streamingText ? "75%" : "25%" }}
-                ></div>
-              </div>
-            </div>
-          )}
-        </div>
-
         {/* Footer */}
         <div className="mt-12 text-center text-sm text-gray-500">
-          <p>Powered by Google Gemini AI • Built with React & Node.js</p>
+          <p>Powered by Google Gemini AI • Built with MERN Stack</p>
         </div>
       </div>
     </div>

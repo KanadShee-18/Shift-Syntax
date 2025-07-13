@@ -14,6 +14,7 @@ import {
   BracesIcon,
 } from "lucide-react";
 import { Separator } from "./ui/separator";
+import Avatar from "./Avatar";
 
 const navitems = [
   {
@@ -47,7 +48,7 @@ const Navbar = () => {
   console.log(location.pathname);
   const pathname = location.pathname;
   const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.auth);
+  const { token, user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const handleLogout = async () => {
     try {
@@ -83,7 +84,7 @@ const Navbar = () => {
       <div
         className={`flex justify-between backdrop-blur-md ${
           pathname === "/code-shift"
-            ? "bg-white/5 shadow-slate-950"
+            ? "bg-white/5"
             : "bg-primary-foreground/20 shadow-slate-300"
         } items-center h-full px-4 md:px-10 rounded-full shadow-md md:mx-10 mx-4`}
       >
@@ -124,7 +125,7 @@ const Navbar = () => {
                   to={pathname === "/code-shift" ? "/" : "/code-shift"}
                   className={`group flex items-center ${
                     pathname === "/code-shift"
-                      ? "bg-background/5 shadow-slate-950"
+                      ? "bg-background/5"
                       : "bg-background shadow-slate-300"
                   } gap-2.5 h-full px-5 text-sm rounded-md hover:bg-gradient-to-br from-teal-200 via-indigo-300 to-slate-200 hover:scale-[0.97] duration-300 transition-all hover:text-slate-800 text-teal-500 font-semibold shadow-sm`}
                 >
@@ -140,17 +141,7 @@ const Navbar = () => {
                       : "Convert Code"}
                   </p>
                 </Link>
-                <Button
-                  onClick={handleLogout}
-                  className={
-                    "group bg-gradient-to-br hover:bg-gradient-to-bl from-teal-600 via-indigo-700 to-slate-700 hover:scale-[0.97] duration-300 transition-all"
-                  }
-                >
-                  <p className="group-hover:-translate-x-1 duration-200 transition-all">
-                    Logout
-                  </p>
-                  <LogOutIcon className="group-hover:translate-x-1 duration-200 transition-all" />
-                </Button>
+                <Avatar user={user} handleLogout={handleLogout} />
               </div>
             )}
           </ul>
