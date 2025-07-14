@@ -70,6 +70,9 @@ const SignIn = () => {
       // console.log("Sign In Error: ", error);
       if (error.response.data) {
         setErrorResp(error.response.data.message);
+        setTimeout(() => {
+          setErrorResp("");
+        }, 5000);
       }
       throw new Error("Error in validating form data");
     } finally {
