@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Code2 } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Hero = () => {
@@ -18,7 +18,15 @@ const Hero = () => {
         <div className="text-center mt-10">
           {/* Main heading */}
           <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold tracking-tight mb-6">
-            <span className="bg-gradient-to-r from-slate-900 via-indigo-900 to-teal-800 bg-clip-text text-transparent">
+            <span
+              initial={{ y: 50, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{
+                duration: 0.3,
+                ease: "easeInOut",
+              }}
+              className="bg-gradient-to-r from-slate-900 via-indigo-900 to-teal-800 bg-clip-text text-transparent"
+            >
               Convert Code Formats With
             </span>
             <br />
@@ -39,7 +47,7 @@ const Hero = () => {
             <Link to={"/code-shift"}>
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 text-white px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 h-12 group hover:scale-[0.97]"
+                className="bg-gradient-to-r rounded-full from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 text-white px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl shadow-slate-400 transition-all duration-300 h-12 group hover:scale-[0.97]"
               >
                 Start Converting
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-2 duration-300 transition-all" />

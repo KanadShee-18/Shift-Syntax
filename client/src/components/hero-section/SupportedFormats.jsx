@@ -13,7 +13,7 @@ const SupportedFormats = () => {
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-teal-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold text-transparent bg-gradient-to-tl from-slate-400 to-indigo-950 bg-clip-text mb-4">
@@ -48,7 +48,7 @@ const SupportedFormats = () => {
         </div>
 
         <div className="text-center mt-12">
-          <p className="text-slate-500 text-lg">
+          <p className="text-slate-500 text-sm md:text-lg font-semibold">
             ...and many more formats supported
           </p>
         </div>

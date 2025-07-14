@@ -75,7 +75,7 @@ export const loginUser = async (req, res) => {
       id: doesUserExists.id,
     };
 
-    if (bcrypt.compare(password, doesUserExists.password)) {
+    if (await bcrypt.compare(password, doesUserExists.password)) {
       const token = jwt.sign(payload, process.env.JWT_SECRET, {
         expiresIn: "24h",
       });
@@ -101,7 +101,7 @@ export const loginUser = async (req, res) => {
           },
         });
     } else {
-      return res.status(402).json({
+      return res.status(401).json({
         success: false,
         message: "Password is not correct",
       });

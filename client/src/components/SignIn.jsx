@@ -3,7 +3,7 @@ import { AuthFooter, AuthHeader } from "./AuthHeader";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
-import { ChevronRightIcon, Loader2Icon } from "lucide-react";
+import { ChevronRightIcon, Loader2Icon, TriangleAlert } from "lucide-react";
 import * as z from "zod";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import axios from "axios";
@@ -27,6 +27,7 @@ const SignIn = () => {
   const { loading } = useSelector((state) => state.auth);
   const [showPassword, setShowPassword] = useState(false);
   const [errorMsg, setErrorMsg] = useState({});
+  const [errorResp, setErrorResp] = useState("");
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -56,7 +57,7 @@ const SignIn = () => {
         validatedData.data,
         { withCredentials: true }
       );
-      // console.log("Axios response: ", resp);
+      console.log("SignIn Response: ", await resp.data);
       const { token } = await resp.data.loggedUser;
       localStorage.setItem("authToken", JSON.stringify(token));
 
@@ -64,9 +65,12 @@ const SignIn = () => {
       localStorage.setItem("user", JSON.stringify({ email, username }));
       dispatch(setToken(token));
       dispatch(setUser({ email, username }));
-    } catch {
+    } catch (error) {
       dispatch(setLoading(false));
-      // console.log("Error in form submission: ", error);
+      // console.log("Sign In Error: ", error);
+      if (error.response.data) {
+        setErrorResp(error.response.data.message);
+      }
       throw new Error("Error in validating form data");
     } finally {
       dispatch(setLoading(false));
@@ -111,6 +115,12 @@ const SignIn = () => {
               />
             </div>
             {errorMsg.password && <FormError msg={errorMsg.password[0]} />}
+            {errorResp && (
+              <span className="text-sm w-full p-2 mt-2 bg-rose-500/15 text-rose-500 font-medium tracking-wide items-center flex flex-row gap-2 rounded-lg">
+                <TriangleAlert className="size-5" />
+                {errorResp}
+              </span>
+            )}
           </div>
 
           <Button
