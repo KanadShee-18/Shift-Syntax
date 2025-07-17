@@ -1,15 +1,12 @@
+import { Route, Routes } from "react-router-dom";
 import HomeSection from "./components/HeroSection";
-import { Routes, Route } from "react-router-dom";
 // import SignUp from "./components/SignUp";
 // import SignIn from "./components/SignIn";
 import { Toaster } from "sonner";
-import PrivateRoute from "./components/PrivateRoute";
-import OpenRoute from "./components/OpenRoute";
 // import CodeShift from "./components/codeConvert/CodeShift";
-import { lazy } from "react";
-import Navbar from "./components/Navbar";
-import { Suspense } from "react";
 import { Loader2Icon } from "lucide-react";
+import { lazy, Suspense } from "react";
+import Navbar from "./components/Navbar";
 
 const About = lazy(() => import("./components/About"));
 const SignUp = lazy(() => import("./components/SignUp"));
@@ -30,7 +27,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<HomeSection />} />
           <Route path="/about" element={<About />} />
-          <Route
+          {/* <Route
             path="/sign-in"
             element={
               <OpenRoute>
@@ -46,13 +43,13 @@ const App = () => {
               </OpenRoute>
             }
           />
-          <Route path="/contact" element={<div>contact</div>} />
+          <Route path="/contact" element={<div>contact</div>} /> */}
           <Route
             path="/code-shift"
             element={
-              <PrivateRoute>
-                <CodeShift />
-              </PrivateRoute>
+              // <PrivateRoute>
+              <CodeShift />
+              // </PrivateRoute>
             }
           />
         </Routes>
